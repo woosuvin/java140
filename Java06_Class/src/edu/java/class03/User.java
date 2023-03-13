@@ -50,4 +50,6 @@ public class User {
 		System.out.printf("ID: %s, PASSWORD: %s, AGE: %d \n", userId, userPassword, userAge);
 	}
 
+	
+	
 }
