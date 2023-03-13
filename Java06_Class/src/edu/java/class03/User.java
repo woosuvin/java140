@@ -23,6 +23,10 @@ public class User {
 	
 	// constructor
 	// 생성자 오버로딩(overloading): parameter가 다른 생성자를 여러개 정의하는 것.
+	// this의 의미(기능):
+	// (1) 생성된 객체(인스턴스) - 인스턴스의 필드와 지역변수를 구별하기 위한 용도.
+	// (2) overloading 된 다른 생성자 호출 
+	
 	public User() { // argument를 갖는 생성자를 만들었으면 디폴트 생성자, 기본 생성자를 하나 더 만들어야됨. 
 		// 코드를 작성하지 않아도, 각 필드들을 그 타입의 기본값으로 초기화를 해줌.
 //		this.userId = null;
