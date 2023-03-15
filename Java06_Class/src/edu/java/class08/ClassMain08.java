@@ -7,13 +7,24 @@ public class ClassMain08 {
 		Account account2 = new Account(444410, 10000);
 		
 		
-		System.out.println(account1.deposit(5000));
+//		System.out.println(account1.deposit(5000));
+//		
+//		System.out.println(account1.withdraw(3000));
+//		
+//		account1.transfer(account2, 20000);
+//		
+//		account1.printInfo();
 		
-		System.out.println(account1.withdraw(3000));
+		double deposit = account1.deposit(3000);
+		System.out.println("잔액: " + deposit);
+		
+		double withdraw = account1.withdraw(5000);
+		System.out.println("잔액: " + withdraw);
 		
 		account1.transfer(account2, 20000);
 		
 		account1.printInfo();
+		
 	}
 
 }
