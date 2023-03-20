@@ -24,6 +24,8 @@ public class InheritanceMain02 {
 		// (1) 생성된 상위클래스의 객체(의 주소): super.field, super.method()
 		// (2) 상위 클래스의 생성자: super(), super(...)
 		
+		// 오버로딩 : parameter가 다를 때 같은 이름으로 생성자를 여러개 만드는 것.
+		
 	}
 
 }
