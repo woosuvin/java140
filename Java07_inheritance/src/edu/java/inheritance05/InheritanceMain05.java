@@ -29,7 +29,7 @@ class B extends A {
 	
 }
 
-// class MyString extends String { } -> final 클래스는 상속할 수 없는 클래스.
+// class MyString extends String { } -> (String) final 클래스는 상속할 수 없는 클래스.
 
 public class InheritanceMain05 {
 	
