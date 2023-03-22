@@ -3,7 +3,7 @@ package edu.java.inheritance09;
 import java.util.Scanner;
 
 enum Menu {
-	// enum 상수(public static final 변수) 선언
+	// enum 열거형 상수(public static final Menu 타입 변수) 선언
 	QUIT, CREATE, READ_ALL, READ_BY_INDEX, UPDATE, DELETE, UNKNOWN;
 
 	/** 
@@ -12,20 +12,27 @@ enum Menu {
 	 * @param n 정수(int)
 	 * @return Menu 타입의 열거형 상수.
 	 */
+//	public static Menu getValue(int n) {
+//		if (n >= 0 && n <= 6) {
+//			Menu[] m = Menu.values();
+//			int index = n;
+//			for (Menu x : m) {
+//				x = m[index];
+//			}
+//			return m[index];
+//		} else {
+//			return UNKNOWN;
+//		}
+//	}
+	
 	public static Menu getValue(int n) {
-		if (n >= 0 && n <= 6) {
-			Menu[] m = Menu.values();
-			int index = n;
-			for (Menu x : m) {
-				x = m[index];
-			}
-			return m[index];
+		Menu[] menu = values(); // values()는 Enum 클래스에서 상속받은 메서드.
+		int length = menu.length;
+		if (n >= 0 && n < length) {
+			return menu[n];
 		} else {
-			return UNKNOWN;
+			return menu[length - 1]; // return UNKNOWN
 		}
-		
-
-		
 	}
 
 
@@ -37,9 +44,12 @@ public class MenuTest {
 	
 
 	public static void main(String[] args) {
+		Singleton s = Singleton.INSTANCE;
+		// -> enum 타입이 열거형 상수를 1개만 가지고 있으면,
+		//    그 enum 타입에 할당할 수 있는 객체는 오직 1개만 있게 됨.
+		// -> 싱글톤 객체
+		
 		Scanner sc = new Scanner(System.in);
-		
-		
 		System.out.println("==================================================================");
 		System.out.println("0.QUIT  1.CREATE  2.READ_ALL  3.READ_BY_INDEX  4.UPDATE  5.DELETE");
 		System.out.println("==================================================================");
