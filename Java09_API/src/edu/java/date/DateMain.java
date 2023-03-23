@@ -1,7 +1,9 @@
 package edu.java.date;
 
+import java.sql.Timestamp;
 // java.lang.String, java.lang.System, ... -> import 문장 생략
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class DateMain {
 
@@ -23,6 +25,21 @@ public class DateMain {
 		
 		LocalDate date = LocalDate.of(2023, 2, 28);
 		System.out.println("개강일: " + date);
+		
+		LocalDateTime now2 = LocalDateTime.now();
+		System.out.println(now2);
+		System.out.println(now2.getHour());
+		
+		// Timestamp: 1970-01-01 00:00:00을 기준으로 1/1000초 (1 milli-second)마다
+		//            1씩 증가하는 정수를 기반으로 날짜와 시간 정보를 저장하는 클래스.
+		// LocalDateTime 객체를 Timestamp 타입 객체로 변환:
+		Timestamp ts = Timestamp.valueOf(now2); // argument: LocalDateTime
+		System.out.println(ts);
+		System.out.println(ts.getTime());
+		
+		// Timestamp 객체를 LocalDateTime 타입 객체로 변환:
+		LocalDateTime dt = ts.toLocalDateTime(); // argument: Timestamp
+		System.out.println(dt);
 	}
 
 }

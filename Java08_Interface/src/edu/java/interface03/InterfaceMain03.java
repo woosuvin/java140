@@ -16,7 +16,7 @@ class H extends A implements E, F {} // 1개 클래스를 상속하고 2개 인�
 // 자바에서 클래스는 단일 상속만 가능하지만, 인터페이스는 다중 상속이 가능!
 interface I extends E, F {}
 
-// 인터페이스는 클래스를 확장할 수 없음.
+// 인터페이스는 클래스를 확장(상속)할 수 없음.
 // interface J extends A {} -> 문법 오류. 상위 인터페이스는 인터페이스만 가능.
 
 
@@ -37,10 +37,22 @@ interface Seller {
 	}
 }
 
-class User implements Buyer {
-	@Override
+class User implements Buyer, Seller {
+	@Override  // Buyer 인터페이스의 추상 메서드를 구현.
 	public void buy() {
 		System.out.println("구매~");
+	}
+	
+	@Override // Seller 인터페이스의 추상 메서드를 구현.
+	public void sell() {
+		System.out.println("판매~");
+	}
+	
+	@Override // 중복되는 default 메서드가 2개의 인터페이스에 있는 경우에는 반드시 override!
+	public void register() {
+		// 상위 인터페이스.super.메서드() 호출
+		Buyer.super.register(); // Buyer 인터페이스의 default 메서드가 호출됨.
+		Seller.super.register(); // Seller 인터페이스의 default 메서드가 호출됨.
 	}
 }
 
@@ -50,6 +62,7 @@ public class InterfaceMain03 {
 		User user1 = new User();
 		user1.register();
 		user1.buy();
+		user1.sell();
 	}
 
 }
