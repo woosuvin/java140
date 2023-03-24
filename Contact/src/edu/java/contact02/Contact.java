@@ -55,6 +55,15 @@ public class Contact {
 		this.email = email;
 	}
 	
+	@Override
+	public String toString() {
+		return "Contact(cid = " + this.cid +
+				", name= " + this.name +
+				", phone= " + this.phone +
+				", email= " + this.email +
+				")";
+		
+	}
 	
 	// method
 	public void printInfo() {
