@@ -1,5 +1,6 @@
 package edu.java.set01;
 
+import java.util.Iterator;
 import java.util.TreeSet;
 
 /*
@@ -28,7 +29,36 @@ public class SetMain01 {
 		System.out.println("set size: " + set.size());
 		System.out.println(set);
 		
-		set.add("a");
+		set.add("hello");
+		set.add("apple"); // TreeSet은 정렬된 형태.
+		set.add("hello"); // 중복된 값은 저장되지 않음.
+		set.add("zip");
+		set.add("banana");
+		
+		System.out.println(set); // Set은 toString을 override.
+		
+		// Set은 인덱스를 갖지 않기 때문에 get(int index) 메서드는 제공되지 않dma.
+		// for 문장을 사용할 수 없음. 인덱스가 없기 때문.
+		// for - each와 iterator 사용 가능.
+		for (String x : set) {
+			System.out.print(x + " ");
+		}
+		System.out.println();
+		
+		Iterator<String> itr = set.iterator(); // 오름차순 반복 도구.
+		while(itr.hasNext()) {
+			System.out.print(itr.next() + " ");
+		}
+		System.out.println();
+		
+		// TreeSet은 정렬 알고리즘이 적용된 객체이기 때문에 내림차순 반복 도구도 제공.
+		Iterator<String> itr2 = set.descendingIterator();
+		while(itr2.hasNext()) {
+			System.out.print(itr2.next() + " ");
+		}
+		System.out.println();
+		
+		
 		
 		
 		
