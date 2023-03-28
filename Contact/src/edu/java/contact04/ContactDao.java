@@ -4,7 +4,7 @@ import java.util.List;
 
 import edu.java.contact.model.Contact;
 
-// MVC(Model - View - Controller) 아키텍쳐에서 Controller에 해당하는 인터페이스.
+// MVC(Model - View - Controller) 아키텍쳐에서 Controller에 해당하는 인터페이스. 인터페이스 구현하는클래스가 따로 있어야 함.
 // DAO(Data Access Object): 데이터를 사용해서 비즈니스 로직(기능)을 수행하는 객체.
 
 public interface ContactDao {
@@ -14,7 +14,7 @@ public interface ContactDao {
 	 * @param  리스트에 저장할 연락처 객체.
 	 * @return 리스트에 저장 성공하면 1, 실패하면 0.
 	 */
-	void create(Contact contact); // 리턴타입 int, argument Contact
+	int create(Contact c); // 리턴타입 int, argument Contact (리텁타입 void 이면?)
 	
 	/**
 	 * 연락처 전체 보기 기능. 저장된 연락처 개수 크기의 연락처 리스트를 리턴.

@@ -27,7 +27,6 @@ public class ContactDaoImpl implements ContactDao {
 	private List<Contact> contacts = new ArrayList<>();
 	
 	//methods
-	
 	/**
 	 * 어떤 인덱스가 검색, 수정, 삭제할 때 사용 가능한 범위 안에 있는 인덱스인지를 리턴.
 	 * @param index 유효한 인덱스인지 검사할 인덱스.
@@ -39,42 +38,46 @@ public class ContactDaoImpl implements ContactDao {
 	
 	// CRUD(Create, Read, Update, Delete) 기능 메서드들:
 	@Override
-	public void create(Contact contact) {
-		contacts.add(contact);
-		return;
+	public int create(Contact c) {
+		contacts.add(c);
+		return 1;
 	}
 
 	@Override
 	public List<Contact> read() { 
-		// -> contacts 배열에 저장된 원소 개수의 크기를 갖는 새로운 배열을 생성.
 		return contacts;
 	}
 
 	@Override
 	public Contact read(int index) {
-		if (isValidIndex(index)) {
+		if (isValidIndex(index)) { // 유효한 인덱스이면
 			return contacts.get(index);
-		} else {
-			return null;
+		} else { // 유효하지 않은 인덱스이면
+			return null; 
 		}
 	}
 
 	@Override
 	public int update(int index, Contact contact) {
-		if (!isValidIndex(index)) { // 유효한 인덱스이면
-		    return 0;
-		} 
-		contacts.set(index, contact);
-		return 1;
+		if (isValidIndex(index)) { 
+			contacts.set(index, contact);
+//			contacts.get(index).setName(contact.getName());
+//			contacts.get(index).setPhone(contact.getPhone());
+//			contacts.get(index).setEmail(contact.getEmail());
+		    return 1;
+		} else {
+			return 0;
+		}
 	}
 
 	@Override
 	public int delete(int index) {
 		if (!isValidIndex(index)) {
 			return 0;
+		} else {
+			contacts.remove(index);
+			return 1;
 		}
-		contacts.remove(index);
-		return 1;
 	}
 
 }

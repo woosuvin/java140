@@ -20,7 +20,7 @@ public class ContactMain04 {
 	public static void main(String[] args) {
 		System.out.println("***** 연락처 프로그램 v0.4 *****");
 		
-		ContactMain04 app = new ContactMain04(); // -> ContactMain03의 static이 아닌 필드와 메서드들을 사용하기 위해서는 객체가 생성되어 있어야 함.
+		ContactMain04 app = new ContactMain04(); // -> ContactMain04의 static이 아닌 필드와 메서드들을 사용하기 위해서는 객체가 생성되어 있어야 함.
 		
 		
 		boolean run = true;
@@ -119,7 +119,7 @@ public class ContactMain04 {
 	
 	private void updateContact() {
 		System.out.println("\n--- 인덱스 수정 ---");
-		System.out.println("수정할 인덱스 입력 >>> ");
+		System.out.print("수정할 인덱스 입력 >>> ");
 		int index = inputNumber();
 		
 		if (!dao.isValidIndex(index)) { // 유효하지 않은 인덱스이면
@@ -127,7 +127,7 @@ public class ContactMain04 {
 			return; // 메서드 종료
 		}
 		Contact before = dao.read(index);
-		System.out.print("수정 전 > " + before);
+		System.out.println("수정 전 > " + before);
 		
 		System.out.print("이름 > ");
 		String name = scanner.nextLine();
