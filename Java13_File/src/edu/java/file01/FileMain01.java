@@ -62,8 +62,7 @@ public class FileMain01 {
 				in.close(); // FIS를 닫음.
 				out.close(); // FOS를 닫음.
 				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
