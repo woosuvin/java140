@@ -41,7 +41,7 @@ public class Score implements Serializable {
 	
 	@Override
 	public String toString() {
-		return String.format("Score (JAVA = %d, WEB = %d, PYTHON = %d)", this.java, this.web, this.python);
+		return String.format("JAVA = %d, WEB = %d, PYTHON = %d", this.java, this.web, this.python);
 	}
 	
 	

@@ -14,6 +14,12 @@ public class Student implements Serializable {
 		this.name = name;
 		this.score = score;
 	}
+	
+	public Student (int id, String name, int java, int web, int python) {
+		this.id = id;
+		this.name = name;
+		this.score = new Score(java, web, python);
+	}
 
 	public int getId() {
 		return id;
@@ -40,8 +46,8 @@ public class Student implements Serializable {
 	}
 	
 	@Override
-	public String toString () {
-		return String.format("Student ( ID = %d, NAME = %s, SCORE = %s )", this.id, this.name, this.score);
+	public String toString () { // Score 객체를 문자열로 만들어준 메서드가 있기 때문에 %s 가능.
+		return String.format("Student ( ID = %d, NAME = %s, SCORE ( %s ) )", this.id, this.name, this.score);
 	}
 	
 	
