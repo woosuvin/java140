@@ -24,15 +24,15 @@ public class FileUtil {
 	// private 생성자 - 다른 클래스에서는 생성자가 보이지 않기 때문에 객체를 생성할 수 없음.
 	private FileUtil() {}
 	
-	/**
+	/** 폴더
 	 * 연락처 데이터 파일을 저장하는 폴더가 존재하지 않으면 생성하고, File 객체를 리턴.
 	 * 이미 폴더가 생성되어 있는 경우에는, 그 폴더의 File 객체를 리턴.
 	 * @return 데이터 파일을 저장할 폴더의 File 객체.
 	 */
 	public static File initDataDir() {
-		File folder = new File(DATA_DIR);
-		if (!folder.exists()) {
-			folder.mkdir();
+		File folder = new File(DATA_DIR); // !폴더!를 관리할 수 있는 파일 객체 생성.
+		if (!folder.exists()) { // 폴더가 존재하지 않으면
+			folder.mkdir(); // 폴더 생성(make directory)
 		} 
 		return folder;
 	}
@@ -46,17 +46,19 @@ public class FileUtil {
 	 * @return Contact 타입을 원소로 갖는 리스트(List).
 	 */
 	public static List<Contact> readDataFromFile(File file) {
+		List<Contact> list = new ArrayList<>(); // 리턴할 변수 선언.
+		
 		try (FileInputStream in = new FileInputStream(file);
 				BufferedInputStream bin = new BufferedInputStream(in);
 				ObjectInputStream oin = new ObjectInputStream(bin);) {
 			
-			ArrayList<Contact> list = (ArrayList<Contact>) oin.readObject();
-			return list;
+			list = (ArrayList<Contact>) oin.readObject(); // readObject리턴타입은 object이므로 casting 해줘야됨.
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
 		}
+		
+		return list;	
 	}
 	
 	/**
@@ -67,7 +69,6 @@ public class FileUtil {
 	 * @param file 데이터 파일(File) 객체.
 	 */
 	public static void writeDataFile(List<Contact> data, File file) {
-		
 		try (FileOutputStream out = new FileOutputStream(file);
 				BufferedOutputStream bout = new BufferedOutputStream(out);
 				ObjectOutputStream oout = new ObjectOutputStream(bout);) {
@@ -79,7 +80,7 @@ public class FileUtil {
 		}
 	}
 	
-	/**
+	/** 파일
 	 * initData.
 	 * 연락처 데이터 파일이 있으면, 파일의 내용을 읽어서 (readDataFromFile 메서드 호출) 리스트를 생성하고 리턴.
 	 * 연락처 데이터 파일이 없으면, 빈 리스트를 리턴.
@@ -87,14 +88,13 @@ public class FileUtil {
 	 * @return Contact 타입을 원소로 갖는 리스트(List<Contact>)
 	 */
 	public static List<Contact> initData() {
-		File file = new File(DATA_DIR + File.separator + DATA_FILE);
-		if (file.exists()) {
-			List<Contact> list = new ArrayList<>();
-			list = readDataFromFile(file);
+		File file = new File(DATA_DIR, DATA_FILE); // !파일!을 관리할 수 있는 파일 객체 생성. .\data\contacts.dat 파일 객체
+		List<Contact> list = new ArrayList<>(); // 빈 리스트 객체 생성.
+		if (file.exists()) { // 파일이 존재하면
+			list = readDataFromFile(file); // file에서 데이터를 read해서 list에 저장.
 			return list;
-		} else {
-			List<Contact> list = new ArrayList<>();
-			return list;
+		} else { // 파일이 존재하지 않으면
+			return list; // 빈 리스트 리턴.
 		}
 	}
 	
