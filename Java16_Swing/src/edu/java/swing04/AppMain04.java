@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class AppMain04 {
 
@@ -19,6 +20,15 @@ public class AppMain04 {
 	
 	private ImageIcon[] images = {new ImageIcon("images/image01.jpg"), new ImageIcon("images/image02.jpg"), 
 			new ImageIcon("images/image03.jpg"), new ImageIcon("images/image04.jpg"), new ImageIcon("images/image05.jpg")};
+	
+	private static final String[] IMAGES = { // 이미지 파일의 경로들을 저장하는 배열.
+			"images/image01.jpg",
+			"images/image02.jpg",
+			"images/image03.jpg",
+			"images/image04.jpg",
+			"images/image05.jpg"
+	};
+	private int curIndex; // 현재 화면에 보여지는 이미지 파일의 인덱스
 	
 	private int count = 0;
 	
@@ -58,56 +68,78 @@ public class AppMain04 {
 		frame.getContentPane().setLayout(null);
 		
 		
-		
-		
-		lblImage = new JLabel("New label");
+		lblImage = new JLabel(new ImageIcon(IMAGES[curIndex])); // new ImageIcon("images/image01.jpg") 첫 화면에 현재 인덱스의 사진을 보여줌.
 		lblImage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblImage.setBounds(100, 100, 400, 400);
 		frame.getContentPane().add(lblImage);
 		
 		btnPre = new JButton("<");
-		btnPre.addActionListener(new ActionListener() {
+		btnPre.setFont(new Font("굴림", Font.BOLD, 21));
+		btnPre.addActionListener(new ActionListener() { // btnPre버튼이 클릭될 때 자동으로 호출되는 메서드
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				btnClick(e);
+//				btnClick(e);
+				showPreImage();
 			}
 		});
-		btnPre.setBounds(79, 700, 97, 23);
+		btnPre.setBounds(12, 668, 180, 55);
 		frame.getContentPane().add(btnPre);
 		
+		
 		btnNext = new JButton(">");
+		btnNext.setFont(new Font("굴림", Font.BOLD, 20));
 		btnNext.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				btnClick(e);
+//				btnClick(e);
+				showNextImage();
 			}
 		});
-		btnNext.setBounds(403, 700, 97, 23);
+//		btnNext.addActionListener(e -> showNextImage()); -> 람다표현식 사용 (actionListener 메서드는 이벤트e가 전달됐을 때 showNextImage를 호출한다.)
+		btnNext.setBounds(392, 668, 180, 55);
 		frame.getContentPane().add(btnNext);
 		
 	}
 
-	protected void btnClick(ActionEvent e) {
-		Object source = e.getSource();
-		
-			System.out.println(source == btnNext);
-			if (source == btnNext) {
-				if (count == images.length - 1) {
-					count = 0; 
-				}else {
-					count ++;
-				}
-			} else if (source == btnPre) {
-				if (count == 0) {
-					count = images.length - 1; 
-				} else {
-					count --;
-				}
-			}
-		
-		lblImage.setIcon(images[count]);
-		System.out.println(count);
+	
+	protected void showPreImage() {
+		if (curIndex == 0) {
+			curIndex = IMAGES.length - 1;
+		}
+		curIndex--;
+		lblImage.setIcon(new ImageIcon(IMAGES[curIndex]));
 	}
+	
+	protected void showNextImage() {
+		if (curIndex == IMAGES.length - 1) {
+			curIndex = 0;
+		}
+		curIndex++;
+		lblImage.setIcon(new ImageIcon(IMAGES[curIndex]));
+	}
+
+
+//	protected void btnClick(ActionEvent e) {
+//		Object source = e.getSource();
+//		
+//			System.out.println(source == btnNext);
+//			if (source == btnNext) {
+//				if (count == images.length - 1) {
+//					count = 0; 
+//				}else {
+//					count ++;
+//				}
+//			} else if (source == btnPre) {
+//				if (count == 0) {
+//					count = images.length - 1; 
+//				} else {
+//					count --;
+//				}
+//			}
+//		
+//		lblImage.setIcon(images[count]);
+//		System.out.println(count);
+//	}
 
 	
 
