@@ -42,19 +42,19 @@ public class Score {
 	}
 	
 	// TODO: 세 과목의 총점을 int 타입으로 리턴하는 메서드 getTotal
-	public int getTotal(int korean, int english, int math) {
+	public int getTotal() {
 		return (korean + english + math);
 	}
 	
 	// TODO: 세 과목의 평균을 double 타입으로 리턴하는 메서드 getMean
-	public double getMean(int korean, int english, int math) {
-		return (double)(korean + english + math)/3;
+	public double getMean() {
+		return (double)getTotal()/3;
 	}
 	
 	// TODO: toString override
 	@Override
 	public String toString() {
-		return String.format("Score | Korean: %d, English: %d, Math: %d, Total: %d, Mean: %f", korean, english, math, getTotal(korean, english ,math), getMean(korean, english ,math));
+		return String.format("Score | Korean: %d, English: %d, Math: %d, Total: %d, Mean: %f", korean, english, math, getTotal(), getMean());
 	}
 	
 }

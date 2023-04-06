@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -84,16 +85,19 @@ public class AppMain07 {
 		frame.getContentPane().add(lblMath);
 		
 		textKorean = new JTextField();
+		textKorean.setFont(new Font("굴림", Font.PLAIN, 20));
 		textKorean.setBounds(156, 38, 362, 57);
 		frame.getContentPane().add(textKorean);
 		textKorean.setColumns(10);
 		
 		textEnglish = new JTextField();
+		textEnglish.setFont(new Font("굴림", Font.PLAIN, 20));
 		textEnglish.setBounds(156, 105, 362, 57);
 		frame.getContentPane().add(textEnglish);
 		textEnglish.setColumns(10);
 		
 		textMath = new JTextField();
+		textMath.setFont(new Font("굴림", Font.PLAIN, 20));
 		textMath.setBounds(156, 172, 362, 57);
 		frame.getContentPane().add(textMath);
 		textMath.setColumns(10);
@@ -102,7 +106,7 @@ public class AppMain07 {
 		btnInsert.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				InsertData(e);
+				InsertData();
 			}
 		});
 		btnInsert.setFont(new Font("굴림", Font.PLAIN, 20));
@@ -113,7 +117,7 @@ public class AppMain07 {
 		btnDelete.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DeleteData(e);
+				DeleteData();
 			}
 		});
 		btnDelete.setFont(new Font("굴림", Font.PLAIN, 20));
@@ -127,31 +131,72 @@ public class AppMain07 {
 		table = new JTable();
 		Object[][] data = {}; // 테이블에 사용할 데이터.
 		model = new DefaultTableModel(data, COLUMN_NAMES);
-		Object[] row = {};
-		model.addRow(row);
-		model.removeRow(0);
 		table.setModel(model);
 		scrollPane.setViewportView(table);
 	}
 
-	protected void DeleteData(ActionEvent event) {
-//		자바 swing jtable jtextfield
+	private void DeleteData() {
+		// 1. 테이블에서 삭제하기 위해 선택된 행의 인덱스를 찾음.
+		// 2. 해당 인덱스의 행을 테이블 모델에서 삭제.
 		
+		int index = table.getSelectedRow();
+//		try {
+//			model.removeRow(index);
+//		} catch (Exception e) {
+//			JOptionPane.showMessageDialog(frame, "선택하세요" + e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
+//		}
+		
+		if (index == -1) {
+			JOptionPane.showMessageDialog(frame, "선택하세요", "선택", JOptionPane.WARNING_MESSAGE);
+			return; // 메서드 종료
+		} else {
+			int confirm = JOptionPane.showConfirmDialog(frame, index + "인덱스 : 정말 삭제할까요?", "삭제", JOptionPane.YES_NO_OPTION);
+			if (confirm == JOptionPane.YES_OPTION) {
+				model.removeRow(index);
+			}
+		}
 	}
 
-	protected void InsertData(ActionEvent event) {
-		Score score = new Score();
+	private void InsertData() {
+		// 1. JTextField에서 세과목의 점수를 읽음.
+		// 2. Score 타입 객체 생성.
+		// 3. Jtable에 행(row)을 추가
 		
-		String kor = textKorean.getText();
-		String eng = textEnglish.getText();
-		String math = textMath.getText();
-		int total = score.getTotal(Integer.parseInt(kor), Integer.parseInt(eng), Integer.parseInt(math));
-		double mean = score.getMean(Integer.parseInt(kor), Integer.parseInt(eng), Integer.parseInt(math));
+		int korean = 0;
+		int english = 0;
+		int math = 0;
 		
-		Object[] row = {kor, eng, math, total, mean};
+		try {
+			korean = Integer.parseInt(textKorean.getText());
+			english = Integer.parseInt(textEnglish.getText());
+			math = Integer.parseInt(textMath.getText());
+			if (korean > 100 || english > 100 || math > 100) {
+				JOptionPane.showMessageDialog(frame, "다시 입력하세요", "error", JOptionPane.ERROR_MESSAGE);
+				clearAllTextFields();
+				return;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(frame, "점수는 반드시 정수로 입력하세요" + e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
+			clearAllTextFields();
+			return;
+		} 
+		
+		Score score = new Score(korean, english, math);
+		int total = score.getTotal();
+		double mean = score.getMean();
+		
+//		Object[] row = {korean, english, math, total, mean};
+		Object[] row = {score.getKorean(), score.getEnglish(), score.getMath(), score.getTotal(), score.getMean()};
 		model.addRow(row);
 		
+		clearAllTextFields();
+		
 	}
-
+	
+	private void clearAllTextFields() {
+		textKorean.setText("");
+		textEnglish.setText("");
+		textMath.setText("");
+	}
 	
 }
