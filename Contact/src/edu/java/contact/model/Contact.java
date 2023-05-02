@@ -9,8 +9,18 @@ import java.io.Serializable;
 // Model 클래스는 VO로 사용되기도 하고, DTO로 사용되기도 한다.
 
 public class Contact implements Serializable {
+	
+	// 오라클 DB 테이블 이름과 컬럼 이름들을 상수로 정의
+	public interface Entity {
+		String TBL_NAME = "CONTACTS";
+		String COL_CID = "CID";
+		String COL_NAME = "NAME";
+		String COL_PHONE = "PHONE";
+		String COL_EMAIL = "EMAIL";
+	}
+	
 	// field
-	private int cid;
+	private int cid; // 테이블의 primary key
 	private String name;
 	private String phone;
 	private String email;

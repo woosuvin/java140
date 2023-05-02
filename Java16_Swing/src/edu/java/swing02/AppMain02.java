@@ -77,6 +77,7 @@ public class AppMain02 {
 	private void handleButtonClick() {
 		// JTextField의 입력 내용을 읽음.
 		String msg = textInput.getText();
+		
 		// 읽은 내용을 JLable에 씀.
 		lblResult.setText(msg);
 		// JTextField의 내용을 지움.
